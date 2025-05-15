@@ -64,7 +64,7 @@ gpt-tutor-lite/
 ```
 public/
 ├ ogp_common.png       # Facebook / LINE / Discord 用
-├ ogp_twitter_v2.png   # Twitter用（v2: URL削除版）
+├ ogp_twitter.png   # Twitter用（URL削除版）
 ├ favicon.ico
 ```
 
@@ -84,12 +84,6 @@ public/
 
 - GUIアプリ：`https://gpt-tutor-lite.vercel.app`
 - LPページ：`https://gpt-lite.vercel.app`
-
----
-
-## 🔄 更新履歴
-
-- 2025-05-15: Twitter用OGP画像を `ogp_twitter_v2.png` に差し替え。metaタグも対応済。
 
 ---
 
