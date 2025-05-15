@@ -27,7 +27,7 @@ export const metadata = {
     description: "教科・学年・単元を入力するだけ。GPTが教材とクイズを3分で自動生成！",
     images: [
       {
-        url: "/ogp_twitter_v5.png",
+        url: "/ogp_twitter.png",
         width: 1200,
         height: 630,
         alt: "GPT教材生成Lite版 Twitter用 OGP",
