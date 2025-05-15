@@ -2,12 +2,13 @@ import "./globals.css";
 import { ReactNode } from "react";
 
 export const metadata = {
+  metadataBase: new URL("https://gpt-tutor-lite.vercel.app"),
   title: "GPT Tutor Lite",
-  description: "3分で教材生成 - Lite版GPT体験",
+  description: "教科・学年・単元を入れるだけ。GPTが教材とクイズを3分で自動生成！",
   openGraph: {
     title: "GPT教材生成Lite版｜たった3分で教材作成完了",
-    description: "教科・学年・単元を入力するだけ。GPTが教材とクイズを自動生成！無料で体験できます。",
-    url: "https://gpt-tutor-lite.vercel.app",
+    description: "教科・学年・単元を入れるだけ。GPTが教材とクイズを3分で自動生成！",
+    url: "/",
     siteName: "GPT Tutor Lite",
     images: [
       {
@@ -19,12 +20,21 @@ export const metadata = {
     ],
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "GPT教材生成Lite版｜たった3分で教材作成完了",
+    description: "教科・学年・単元を入れるだけ。GPTが教材とクイズを3分で自動生成！",
+    images: ["/ogp.png"],
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja">
-      <body className="bg-white text-black">{children}</body>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+      <body className="bg-white text-gray-900 antialiased">{children}</body>
     </html>
   );
 }
