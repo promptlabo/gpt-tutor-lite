@@ -3,29 +3,22 @@ import "./globals.css";
 import { ReactNode } from "react";
 
 export const metadata = {
-  metadataBase: new URL("https://gpt-tutor-lite.vercel.app"),
-  title: "GPT Tutor Lite",
-  description: "教科・学年・単元を入れるだけ。GPTが教材とクイズを3分で自動生成！",
+  ...
   openGraph: {
-    title: "GPT教材生成Lite版｜たった3分で教材作成完了",
-    description: "教科・学年・単元を入れるだけ。GPTが教材とクイズを3分で自動生成！",
-    url: "/",
-    siteName: "GPT Tutor Lite",
     images: [
       {
-        url: "/ogp.png",
+        url: "/ogp_common.png", // ← Facebook・LINE等用
         width: 1200,
         height: 630,
-        alt: "GPT教材生成Lite版 OGP画像",
+        alt: "GPT教材生成Lite版 OGP",
       },
     ],
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "GPT教材生成Lite版｜たった3分で教材作成完了",
     description: "教科・学年・単元を入れるだけ。GPTが教材とクイズを3分で自動生成！",
-    images: ["/ogp.png"],
+    images: ["/ogp_twitter.png"],
   },
 };
 
