@@ -53,7 +53,7 @@ gpt-tutor-lite/
 
 ## 🖼 使用イメージ（SNSシェア用）
 
-![GPT教材生成Lite - OGP](./public/ogp.png)
+![GPT教材生成Lite - OGP](./public/ogp_common.png)
 
 ---
 
@@ -63,14 +63,16 @@ gpt-tutor-lite/
 
 ```
 public/
-├ ogp.png
-└ favicon.ico
+├ ogp_common.png       # Facebook / LINE / Discord 用
+├ ogp_twitter_v2.png   # Twitter用（v2: URL削除版）
+├ favicon.ico
 ```
 
 対応metaタグ例（`app/layout.tsx` または `<Head>` 内）：
 
 ```tsx
-<meta property="og:image" content="/ogp.png" />
+<meta property="og:image" content="/ogp_common.png" />
+<meta name="twitter:image" content="/ogp_twitter_v2.png" />
 <link rel="icon" href="/favicon.ico" />
 ```
 
@@ -82,6 +84,12 @@ public/
 
 - GUIアプリ：`https://gpt-tutor-lite.vercel.app`
 - LPページ：`https://gpt-lite.vercel.app`
+
+---
+
+## 🔄 更新履歴
+
+- 2025-05-15: Twitter用OGP画像を `ogp_twitter_v2.png` に差し替え。metaタグも対応済。
 
 ---
 
