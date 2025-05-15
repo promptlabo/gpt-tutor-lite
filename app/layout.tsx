@@ -3,22 +3,36 @@ import "./globals.css";
 import { ReactNode } from "react";
 
 export const metadata = {
-  ...
+  metadataBase: new URL("https://gpt-tutor-lite.vercel.app"),
+  title: "GPT Tutor Lite",
+  description: "教科・学年・単元を入れるだけ。GPTが教材とクイズを3分で自動生成！",
   openGraph: {
+    title: "GPT教材生成Lite版｜たった3分で教材作成完了",
+    description: "教科・学年・単元を入力するだけ。GPTが教材とクイズを3分で自動生成！",
+    url: "https://gpt-tutor-lite.vercel.app/",
+    siteName: "GPT Tutor Lite",
     images: [
       {
-        url: "/ogp_common.png", // ← Facebook・LINE等用
+        url: "/ogp_common.png",
         width: 1200,
         height: 630,
-        alt: "GPT教材生成Lite版 OGP",
+        alt: "GPT教材生成Lite版 OGP画像",
       },
     ],
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "GPT教材生成Lite版｜たった3分で教材作成完了",
-    description: "教科・学年・単元を入れるだけ。GPTが教材とクイズを3分で自動生成！",
-    images: ["/ogp_twitter.png"],
+    description: "教科・学年・単元を入力するだけ。GPTが教材とクイズを3分で自動生成！",
+    images: [
+      {
+        url: "/ogp_twitter_v3.png",
+        width: 1200,
+        height: 630,
+        alt: "GPT教材生成Lite版 Twitter用 OGP",
+      },
+    ],
   },
 };
 
@@ -27,18 +41,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ja">
       <head>
         <link rel="icon" href="/favicon.ico" />
-        {/* ✅ Googleタグマネージャー（gtag.js）本番IDで設定済み */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-933468720" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-933468720');
-            `,
-          }}
-        />
       </head>
       <body className="bg-white text-gray-900 antialiased">{children}</body>
     </html>
