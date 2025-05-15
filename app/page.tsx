@@ -12,7 +12,7 @@ export default function LiteTeachingApp() {
   const [output, setOutput] = useState<string | null>(null);
 
   const generateMaterial = () => {
-    const sample = `【${subject}】${grade}年生 - 「${topic}」の教材サンプル
+    const sample = `【${subject}】${grade} - 「${topic}」の教材サンプル
 
 ---
 ■ 教材内容（要点まとめ）
@@ -31,7 +31,7 @@ Q3: 応用問題: △△を使って説明せよ`;
       <div className="max-w-xl mx-auto space-y-4">
         <h1 className="text-xl font-bold text-center">3分で教材生成 - Lite版GPT体験</h1>
         <Input placeholder="教科 (例: 数学)" value={subject} onChange={(e) => setSubject(e.target.value)} />
-        <Input placeholder="学年 (例: 中2)" value={grade} onChange={(e) => setGrade(e.target.value)} />
+        <Input placeholder="学年 (例: 小5・中2・高校1年生)" value={grade} onChange={(e) => setGrade(e.target.value)} />
         <Input placeholder="単元・テーマ (例: 一次関数)" value={topic} onChange={(e) => setTopic(e.target.value)} />
         <Button onClick={generateMaterial}>教材を生成する</Button>
 
@@ -43,6 +43,10 @@ Q3: 応用問題: △△を使って説明せよ`;
               </CardContent>
             </Card>
 
+            <p className="text-center text-sm text-gray-500 mt-2">
+              入力項目をすべて埋めると、より精度の高い教材が作れます。
+            </p>
+            
             <div className="space-y-2 text-center mt-6">
               <p className="text-sm">もっと多機能な教材作成をしたい方は...</p>
               <Button
