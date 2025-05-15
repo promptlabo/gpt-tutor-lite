@@ -34,15 +34,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ja">
       <head>
         <link rel="icon" href="/favicon.ico" />
-        {/* ✅ Googleタグマネージャー（gtag.js）追加 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXX" />
+        {/* ✅ Googleタグマネージャー（gtag.js）本番IDで設定済み */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-933468720" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'AW-XXXXXXX');
+              gtag('config', 'AW-933468720');
             `,
           }}
         />
