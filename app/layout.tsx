@@ -1,3 +1,4 @@
+// app/layout.tsx
 import "./globals.css";
 import { ReactNode } from "react";
 
@@ -33,6 +34,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ja">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        {/* ✅ Googleタグマネージャー（gtag.js）追加 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXX" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-XXXXXXX');
+            `,
+          }}
+        />
       </head>
       <body className="bg-white text-gray-900 antialiased">{children}</body>
     </html>
