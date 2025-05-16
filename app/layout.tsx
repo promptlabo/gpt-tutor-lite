@@ -1,6 +1,6 @@
-// app/layout.tsx
 import "./globals.css";
 import { ReactNode } from "react";
+import Script from "next/script"; // ✅ 追加
 
 export const metadata = {
   metadataBase: new URL("https://gpt-tutor-lite.vercel.app"),
@@ -41,6 +41,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ja">
       <head>
         <link rel="icon" href="/favicon.ico" />
+
+        {/* ✅ Google Analytics (GA4) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-T4RPWCC8RB"
+          strategy="afterInteractive"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-T4RPWCC8RB');
+          `}
+        </Script>
       </head>
       <body className="bg-white text-gray-900 antialiased">{children}</body>
     </html>
