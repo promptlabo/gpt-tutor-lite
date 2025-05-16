@@ -18,6 +18,16 @@ export default function UpgradeSectionA() {
     "LINEで相談する"
   ];
 
+  // ✅ CTAクリック時のGAイベント送信処理
+  const handleClick = (label: string) => {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", "click_upgrade_cta", {
+        label,
+        variant: "A", // UpgradeEntry.tsxと対応
+      });
+    }
+  };
+
   return (
     <>
       {/* セクション1：キャッチコピー＋共感導入 */}
@@ -86,6 +96,7 @@ export default function UpgradeSectionA() {
           {ctaTexts.map((text, index) => (
             <button
               key={index}
+              onClick={() => handleClick(text)}
               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm"
               aria-label={text}
             >
