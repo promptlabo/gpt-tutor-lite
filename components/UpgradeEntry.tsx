@@ -33,17 +33,18 @@ export default function UpgradeEntry() {
     setVariant(selected);
 
     // === イベントトラッキング（Google Analyticsの例）===
-    if (typeof window !== "undefined" && "gtag" in window) {
-      window.gtag?.("event", "view_upgrade_section", {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", "view_upgrade_section", {
         variant: selected,
         page_path: window.location.pathname,
       });
     }
 
     // === Mixpanel例 ===
-    // window.mixpanel?.track("View Upgrade Section", { variant: selected });
+    // if (typeof window !== "undefined" && typeof window.mixpanel?.track === "function") {
+    //   window.mixpanel.track("View Upgrade Section", { variant: selected });
+    // }
   }, []);
 
-  // バリアントに応じて表示切り替え
   return variant === "A" ? <UpgradeSectionA /> : <UpgradeSectionB />;
 }
