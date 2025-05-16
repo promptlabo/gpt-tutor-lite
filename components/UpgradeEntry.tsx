@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import UpgradeSectionA from "./UpgradeSectionA";
 import UpgradeSectionB from "./UpgradeSectionB";
 
+// === gtag 型定義追加 ===
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 // 定数：localStorageキー
 const VARIANT_KEY = "upgrade_section_variant";
 
@@ -39,11 +46,6 @@ export default function UpgradeEntry() {
         page_path: window.location.pathname,
       });
     }
-
-    // === Mixpanel例 ===
-    // if (typeof window !== "undefined" && typeof window.mixpanel?.track === "function") {
-    //   window.mixpanel.track("View Upgrade Section", { variant: selected });
-    // }
   }, []);
 
   return variant === "A" ? <UpgradeSectionA /> : <UpgradeSectionB />;
