@@ -24,6 +24,7 @@ export default function UpgradeSectionB() {
     console.log("✅ clicked!", label); // 👈 これを追加！
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       window.gtag("event", "click_upgrade_cta", {
+        send_to: "G-T4RPWCC8RB",  // ここを追加
         event_category: "engagement",
         event_label: label,
         variant: "B", // UpgradeEntry.tsxのA/Bテストに対応
