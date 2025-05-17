@@ -103,17 +103,17 @@ export default function UpgradeSectionA() {
 
       {/* セクション4：CTAボタン */}
       <section className="px-4 py-6 bg-blue-50 text-center">
-  <p className="text-sm mb-3">もっと多機能な教材作成をしたい方は…</p>
-  <div className="flex justify-center">
-    <button
-      onClick={() => handleClick("正式版はこちら")}
-      className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm"
-      aria-label="正式版はこちら"
-    >
-      正式版はこちら
-    </button>
-  </div>
-</section>
+        <p className="text-sm mb-3">もっと多機能な教材作成をしたい方は…</p>
+        <div className="flex justify-center">
+          <button
+            onClick={() => handleClick("正式版はこちら")}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm"
+            aria-label="正式版はこちら"
+            >
+            正式版はこちら
+          </button>
+        </div>
+      </section>
     </>
   );
 }
