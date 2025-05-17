@@ -3,30 +3,41 @@
 import React from "react";
 
 export default function UpgradeSectionB() {
-  const handleClick = () => {
-  console.log("✅ clicked!");
-  console.log("typeof gtag:", typeof window.gtag);
+  const handleClick = (label: string) => {
+  console.log("✅ clicked!", label);
 
-  if (typeof window !== "undefined" && typeof window.gtag === "function") {
-    window.gtag("event", "click_upgrade_cta");
-    console.log("📤 GA event sent!");
-  } else {
-    console.warn("⚠️ gtag not available");
-  }
+  const url = "https://www.google.com";
+  let callbackFired = false;
 
-  window.open("https://www.google.com", "_blank");
-      }
-    };
-
-    if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      console.log("📤 sending GA event...");
-      window.gtag("event", "click_upgrade_cta");
-      setTimeout(openWindow, 2000);
-    } else {
-      console.log("⚠️ gtag not found. fallback triggered.");
-      openWindow();
+  const openWindow = () => {
+    if (!callbackFired) {
+      callbackFired = true;
+      console.log("🏁 callback fired! opening window...");
+      window.open(url, "_blank");
     }
   };
+
+  // GAが使えるならイベント送信
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    console.log("📤 sending GA event...");
+    
+    // 1 tick 遅らせて呼び出す（初期化レース回避）
+    setTimeout(() => {
+      window.gtag!("event", "click_upgrade_cta", {
+        event_category: "engagement",
+        event_label: label,
+        variant: "B",
+        event_callback: openWindow,
+      });
+    }, 0);
+
+    // 保険：2秒以内に callback が呼ばれなければ open
+    setTimeout(openWindow, 2000);
+  } else {
+    console.log("⚠️ gtag not available, fallback triggered.");
+    openWindow();
+  }
+};
 
   return (
     <section className="p-8">
