@@ -1,3 +1,4 @@
+// ✅ UpgradeSectionB.tsx
 import React from "react";
 
 export default function UpgradeSectionB() {
@@ -12,43 +13,40 @@ export default function UpgradeSectionB() {
     "画面つき操作マニュアルつきで安心",
     "現場で役立つプロンプト設計集を収録"
   ];
-  
-  // ✅ クリックイベントで GA に送信
-const handleClick = (label: string) => {
-  console.log("✅ clicked!", label);
 
-  const url = "https://www.google.com"; // ← 修正済み：存在するURLへ変更
-  let callbackFired = false;
+  const handleClick = (label: string) => {
+    console.log("✅ clicked!", label);
 
-  const openWindow = () => {
-    if (!callbackFired) {
-      callbackFired = true;
-      console.log("🏁 callback fired! opening window...");
-      window.open(url, "_blank");
+    const url = "https://www.google.com";
+    let callbackFired = false;
+
+    const openWindow = () => {
+      if (!callbackFired) {
+        callbackFired = true;
+        console.log("🏁 callback fired! opening window...");
+        window.open(url, "_blank");
+      }
+    };
+
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      console.log("📤 sending GA event...");
+      window.gtag("event", "click_upgrade_cta", {
+        send_to: "G-T4RPWCC8RB",
+        event_category: "engagement",
+        event_label: label,
+        variant: "B",
+        event_callback: openWindow,
+      });
+
+      setTimeout(openWindow, 1500);
+    } else {
+      console.log("⚠️ gtag not found. fallback triggered.");
+      openWindow();
     }
   };
 
-  if (typeof window !== "undefined" && typeof window.gtag === "function") {
-    console.log("📤 sending GA event...");
-    window.gtag("event", "click_upgrade_cta", {
-      send_to: "G-T4RPWCC8RB",
-      event_category: "engagement",
-      event_label: label,
-      variant: "B",
-      event_callback: openWindow,
-    });
-
-    // フォールバック：1.5秒後に window.open を実行（保険）
-    setTimeout(openWindow, 1500);
-  } else {
-    console.log("⚠️ gtag not found. fallback triggered.");
-    openWindow();
-  }
-};
-
   return (
     <>
-      {/* セクション1：キャッチコピー＋導入 */}
       <section className="bg-white p-6 rounded-2xl shadow-md mb-6">
         <h2 className="text-xl font-bold mb-2">{catchPhrases[0]}</h2>
         <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
@@ -58,7 +56,6 @@ const handleClick = (label: string) => {
         </ul>
       </section>
 
-      {/* セクション2：機能比較表 */}
       <section className="bg-white p-6 rounded-2xl shadow-md mb-6 overflow-x-auto">
         <h3 className="text-lg font-semibold mb-3">Lite版と正式版の違い</h3>
         <table className="min-w-full text-sm border border-gray-300">
@@ -94,7 +91,6 @@ const handleClick = (label: string) => {
         </table>
       </section>
 
-      {/* セクション3：特典紹介 */}
       <section className="bg-white p-6 rounded-2xl shadow-md mb-6">
         <h3 className="text-lg font-semibold mb-2">正式版だけの特典</h3>
         <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
@@ -104,17 +100,14 @@ const handleClick = (label: string) => {
         </ul>
       </section>
 
-      {/* セクション4：CTA */}
       <section className="bg-white p-6 rounded-2xl shadow-md text-center">
-        <p className="text-sm text-gray-700 mb-4">
-          まずは内容をじっくりご確認ください
-        </p>
+        <p className="text-sm text-gray-700 mb-4">まずは内容をじっくりご確認ください</p>
         <div className="space-y-2">
           <button
             onClick={() => handleClick("正式版はこちら")}
             className="w-full bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition"
             aria-label="CTA: 正式版はこちら"
-            >
+          >
             正式版はこちら
           </button>
         </div>
