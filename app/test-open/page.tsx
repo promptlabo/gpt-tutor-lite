@@ -24,14 +24,17 @@ export default function TestOpenPage() {
   }, []);
 
   const handleClick = () => {
-    console.log("✅ clicked!");
-    if (typeof window.gtag === "function") {
-      console.log("📤 sending GA event...");
-      window.gtag("event", "click_test_button", {
-        event_category: "test",
-        event_label: "test-click",
-      });
-    }
+  console.log("✅ clicked!");
+  if (typeof window.gtag === "function") {
+    console.log("📤 sending GA event...");
+    window.gtag("event", "click_test_button", {
+      event_category: "test",
+      event_label: "test-click",
+    });
+    setTimeout(() => {
+      window.open("https://www.google.com", "_blank");
+    }, 500); // ← 0.5秒待ってから遷移
+  } else {
     window.open("https://www.google.com", "_blank");
   };
 
