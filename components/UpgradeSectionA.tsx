@@ -26,22 +26,22 @@ export default function UpgradeSectionA() {
     const openWindow = () => {
       if (!callbackFired) {
         callbackFired = true;
+        console.log("🏁 callback fired! opening window...");
         window.open("https://gpt-tutor-lite.vercel.app", "_blank");
       }
     };
 
+    console.log("📤 sending GA event...");
     window.gtag("event", "click_upgrade_cta", {
-      send_to: "G-T4RPWCC8RB",
       event_category: "engagement",
       event_label: label,
       variant: "A",
-      event_callback: openWindow,
+      event_callback: openWindow
     });
 
-    // 念のため2秒後に強制実行（GAが失敗した場合に備えて）
-    setTimeout(openWindow, 2000);
+    setTimeout(openWindow, 2000); // 保険
   } else {
-    // gtagが無効な場合も開く
+    console.log("⚠️ gtag not available, opening window");
     window.open("https://gpt-tutor-lite.vercel.app", "_blank");
   }
 };
