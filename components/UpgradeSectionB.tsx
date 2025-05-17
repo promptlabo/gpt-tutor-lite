@@ -12,13 +12,7 @@ export default function UpgradeSectionB() {
     "画面つき操作マニュアルつきで安心",
     "現場で役立つプロンプト設計集を収録"
   ];
-
-  const ctaTexts = [
-    "正式版を見る",
-    "今すぐアップグレード",
-    "LINEで相談する"
-  ];
-
+  
   // ✅ クリックイベントで GA に送信
   const handleClick = (label: string) => {
   console.log("✅ clicked!", label);
@@ -111,18 +105,17 @@ export default function UpgradeSectionB() {
 
       {/* セクション4：CTA */}
       <section className="bg-white p-6 rounded-2xl shadow-md text-center">
-        <p className="text-sm text-gray-700 mb-4">まずは内容をじっくりご確認ください</p>
+        <p className="text-sm text-gray-700 mb-4">
+          まずは内容をじっくりご確認ください
+        </p>
         <div className="space-y-2">
-          {ctaTexts.map((text, index) => (
-            <button
-              key={index}
-              onClick={() => handleClick(text)}
-              className="w-full bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition"
-              aria-label={`CTA: ${text}`}
+          <button
+            onClick={() => handleClick("正式版はこちら")}
+            className="w-full bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition"
+            aria-label="CTA: 正式版はこちら"
             >
-              {text}
-            </button>
-          ))}
+            正式版はこちら
+          </button>
         </div>
       </section>
     </>
