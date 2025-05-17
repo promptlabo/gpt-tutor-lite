@@ -1,45 +1,42 @@
-// ✅ UpgradeSectionA.tsx
 "use client";
-
 import React from "react";
 
 export default function UpgradeSectionA() {
   const catchPhrases = [
     "Lite版、使ってみてどうでしたか？",
-    "忙しい先生こそ、もっとラクに。"
+    "忙しい先生こそ、もっとラクに。",
   ];
 
   const benefits = [
     "10種類の教材テンプレートで準備時間を短縮",
     "すぐ使える操作マニュアル付きで安心",
-    "プロのノウハウが詰まったプロンプト設計集を同封"
+    "プロのノウハウが詰まったプロンプト設計集を同封",
   ];
 
   const handleClick = (label: string) => {
+    console.log("✅ clicked!", label);
+
+    const newTab = window.open("about:blank"); // ← 即時に開く
+
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      let callbackFired = false;
-
-      const openWindow = () => {
-        if (!callbackFired) {
-          callbackFired = true;
-          console.log("🏁 callback fired! opening window...");
-          window.open("https://www.google.com", "_blank");
-        }
-      };
-
       console.log("📤 sending GA event...");
       window.gtag("event", "click_upgrade_cta", {
         send_to: "G-T4RPWCC8RB",
         event_category: "engagement",
         event_label: label,
         variant: "A",
-        event_callback: openWindow,
+        event_callback: () => {
+          console.log("🏁 callback fired! navigating tab...");
+          newTab?.location.replace("https://www.google.com");
+        },
       });
 
-      setTimeout(openWindow, 2000); // 保険
+      setTimeout(() => {
+        newTab?.location.replace("https://www.google.com");
+      }, 1500); // 保険
     } else {
-      console.log("⚠️ gtag not available, opening window");
-      window.open("https://www.google.com", "_blank");
+      console.log("⚠️ gtag not found. fallback triggered.");
+      newTab?.location.replace("https://www.google.com");
     }
   };
 
@@ -56,7 +53,9 @@ export default function UpgradeSectionA() {
 
       <section className="px-4 py-6 bg-gray-50 text-gray-800">
         <h2 className="text-lg font-semibold mb-3">Lite版と正式版の違い</h2>
-        <p className="text-xs text-gray-600 mb-2">※スマホでは表を横にスクロールしてご覧ください</p>
+        <p className="text-xs text-gray-600 mb-2">
+          ※スマホでは表を横にスクロールしてご覧ください
+        </p>
         <div className="overflow-auto">
           <table className="table-auto border-collapse w-full text-sm">
             <thead>
