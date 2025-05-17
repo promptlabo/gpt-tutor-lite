@@ -21,23 +21,30 @@ export default function UpgradeSectionA() {
   // ✅ CTAクリック時のGAイベント送信処理
   const handleClick = (label: string) => {
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    let callbackFired = false;
+
+    const openWindow = () => {
+      if (!callbackFired) {
+        callbackFired = true;
+        window.open("https://gpt-tutor-lite.vercel.app", "_blank");
+      }
+    };
+
     window.gtag("event", "click_upgrade_cta", {
       send_to: "G-T4RPWCC8RB",
       event_category: "engagement",
       event_label: label,
       variant: "A",
-      // 👇 GA送信が完了したら呼ばれる
-      event_callback: () => {
-        window.location.href = "https://gpt-lite.vercel.app";
-      }
+      event_callback: openWindow,
     });
 
-    // 念のためのタイムアウトフォールバック（5秒以内に送信されない場合でも進む）
-    setTimeout(() => {
-      window.location.href = "https://gpt-lite.vercel.app";
-    }, 1500);
+    // 念のため2秒後に強制実行（GAが失敗した場合に備えて）
+    setTimeout(openWindow, 2000);
+  } else {
+    // gtagが無効な場合も開く
+    window.open("https://gpt-tutor-lite.vercel.app", "_blank");
   }
-  };
+};
 
   return (
     <>
