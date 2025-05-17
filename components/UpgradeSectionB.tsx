@@ -29,6 +29,10 @@ export default function UpgradeSectionB() {
         event_label: label,
         variant: "B", // UpgradeEntry.tsxのA/Bテストに対応
       });
+
+      setTimeout(() => {
+      window.open("https://gpt-lite.vercel.app", "_blank");
+    }, 300);
     }
   };
 
