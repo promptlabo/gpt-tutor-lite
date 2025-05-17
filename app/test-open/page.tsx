@@ -1,16 +1,24 @@
+// app/test-open/page.tsx
 "use client";
 
 import { useEffect } from "react";
 
+// ✅ TypeScriptにdataLayerの存在を教える
+declare global {
+  interface Window {
+    dataLayer: any[];
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 export default function TestOpenPage() {
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // ✅ 型の追加：dataLayer を window に明示的に定義
-      (window as any).dataLayer = (window as any).dataLayer || [];
+      window.dataLayer = window.dataLayer || [];
       function gtag(...args: any[]) {
-        (window as any).dataLayer.push(args);
+        window.dataLayer.push(args);
       }
-      (window as any).gtag = gtag;
+      window.gtag = gtag;
       console.log("🧪 injected gtag manually");
     }
   }, []);
