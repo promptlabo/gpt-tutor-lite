@@ -1,4 +1,5 @@
 // app/test-open/page.tsx
+"use client";
 
 export default function TestOpenPage() {
   return (
