@@ -12,12 +12,6 @@ export default function UpgradeSectionA() {
     "プロのノウハウが詰まったプロンプト設計集を同封"
   ];
 
-  const ctaTexts = [
-    "正式版を見る",
-    "今すぐアップグレード",
-    "LINEで相談する"
-  ];
-
   // ✅ CTAクリック時のGAイベント送信処理
   const handleClick = (label: string) => {
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
@@ -109,20 +103,17 @@ export default function UpgradeSectionA() {
 
       {/* セクション4：CTAボタン */}
       <section className="px-4 py-6 bg-blue-50 text-center">
-        <p className="text-sm mb-3">迷ったらまずは特典内容をチェック！</p>
-        <div className="flex flex-col sm:flex-row justify-center gap-3">
-          {ctaTexts.map((text, index) => (
-            <button
-              key={index}
-              onClick={() => handleClick(text)}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm"
-              aria-label={text}
-            >
-              {text}
-            </button>
-          ))}
-        </div>
-      </section>
+  <p className="text-sm mb-3">もっと多機能な教材作成をしたい方は…</p>
+  <div className="flex justify-center">
+    <button
+      onClick={() => handleClick("正式版はこちら")}
+      className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm"
+      aria-label="正式版はこちら"
+    >
+      正式版はこちら
+    </button>
+  </div>
+</section>
     </>
   );
 }
