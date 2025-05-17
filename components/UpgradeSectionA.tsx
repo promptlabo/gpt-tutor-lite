@@ -19,12 +19,7 @@ export default function UpgradeSectionA() {
 
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       console.log("📤 sending GA event...");
-      window.gtag("event", "click_upgrade_cta", {
-        event_category: "engagement",
-        event_label: label,
-        variant: "A",
-        event_callback: openWindow,
-      });
+      window.gtag("event", "click_upgrade_cta");
       setTimeout(openWindow, 2000);
     } else {
       console.log("⚠️ gtag not available, opening window");
