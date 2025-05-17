@@ -21,20 +21,34 @@ export default function UpgradeSectionB() {
 
   // ✅ クリックイベントで GA に送信
   const handleClick = (label: string) => {
-    console.log("✅ clicked!", label); // 👈 これを追加！
-    if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("event", "click_upgrade_cta", {
-        send_to: "G-T4RPWCC8RB",  // ここを追加
-        event_category: "engagement",
-        event_label: label,
-        variant: "B", // UpgradeEntry.tsxのA/Bテストに対応
-      });
+  console.log("✅ clicked!", label);
 
-      setTimeout(() => {
-      window.open("https://gpt-lite.vercel.app", "_blank");
-    }, 300);
+  const url = "https://gpt-lite.vercel.app";
+  let callbackFired = false;
+
+  const openWindow = () => {
+    if (!callbackFired) {
+      callbackFired = true;
+      window.open(url, "_blank");
     }
   };
+
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", "click_upgrade_cta", {
+      send_to: "G-T4RPWCC8RB",
+      event_category: "engagement",
+      event_label: label,
+      variant: "B",
+      event_callback: openWindow, // ✅ イベント送信完了後に実行
+    });
+
+    // ✅ 念のためのフォールバック（失敗時にも開く）
+    setTimeout(openWindow, 1500);
+  } else {
+    // gtagがない環境用のフォールバック
+    openWindow();
+  }
+};
 
   return (
     <>
