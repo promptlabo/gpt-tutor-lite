@@ -12,11 +12,8 @@ declare global {
 
 export default function TestOpenPage() {
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      // gtag 初期化
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = gtag;
-      console.log("🧪 gtag manually injected");
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      console.log("✅ gtag is ready");
 
       // ✅ テストイベントを5回送信（1秒おき）
       for (let i = 1; i <= 5; i++) {
@@ -28,13 +25,17 @@ export default function TestOpenPage() {
           });
         }, i * 1000);
       }
+    } else {
+      console.warn("⚠️ gtag is not defined. GA script may not be loaded.");
     }
   }, []);
 
   return (
     <div className="p-8">
       <h1 className="text-xl font-bold mb-4">自動送信テスト中</h1>
-      <p>このページを開くと GA4 に <code>click_test_button</code> イベントが 5 回送信されます。</p>
+      <p>
+        このページを開くと GA4 に <code>click_test_button</code> イベントが 5 回送信されます。
+      </p>
     </div>
   );
 }
