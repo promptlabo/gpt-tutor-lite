@@ -5,11 +5,12 @@ import { useEffect } from "react";
 export default function TestOpenPage() {
   useEffect(() => {
     if (typeof window !== "undefined") {
-      window.dataLayer = window.dataLayer || [];
+      // ✅ 型の追加：dataLayer を window に明示的に定義
+      (window as any).dataLayer = (window as any).dataLayer || [];
       function gtag(...args: any[]) {
-        window.dataLayer.push(args);
+        (window as any).dataLayer.push(args);
       }
-      window.gtag = gtag;
+      (window as any).gtag = gtag;
       console.log("🧪 injected gtag manually");
     }
   }, []);
