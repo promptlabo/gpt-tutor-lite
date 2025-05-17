@@ -15,9 +15,6 @@ export default function TestOpenPage() {
     if (typeof window !== "undefined") {
       // gtag 初期化
       window.dataLayer = window.dataLayer || [];
-      const gtag = (...args: any[]) => {
-        window.dataLayer.push(args);
-      };
       window.gtag = gtag;
       console.log("🧪 gtag manually injected");
 
