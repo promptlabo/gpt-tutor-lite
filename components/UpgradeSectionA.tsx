@@ -21,13 +21,13 @@ const handleClick = (label: string) => {
       if (!callbackFired) {
         callbackFired = true;
         console.log("🏁 callback fired! opening window...");
-        window.open("https://google.com", "_blank");
+        window.open("https://www.google.com", "_blank"); // ← ここを変更
       }
     };
 
     console.log("📤 sending GA event...");
     window.gtag("event", "click_upgrade_cta", {
-      send_to: "G-T4RPWCC8RB", // ✅ ←これを追加
+      send_to: "G-T4RPWCC8RB",
       event_category: "engagement",
       event_label: label,
       variant: "A",
@@ -37,7 +37,7 @@ const handleClick = (label: string) => {
     setTimeout(openWindow, 2000); // 保険
   } else {
     console.log("⚠️ gtag not available, opening window");
-    window.open("https://gpt-tutor-lite.vercel.app", "_blank");
+    window.open("https://www.google.com", "_blank"); // ← ここも変更
   }
 };
 
