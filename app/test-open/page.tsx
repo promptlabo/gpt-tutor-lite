@@ -1,4 +1,3 @@
-// app/test-open/page.tsx
 "use client";
 
 import { useEffect } from "react";
