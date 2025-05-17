@@ -21,7 +21,7 @@ const handleClick = (label: string) => {
       if (!callbackFired) {
         callbackFired = true;
         console.log("🏁 callback fired! opening window...");
-        window.open("https://gpt-tutor-lite.vercel.app", "_blank");
+        window.open("https://google.com", "_blank");
       }
     };
 
