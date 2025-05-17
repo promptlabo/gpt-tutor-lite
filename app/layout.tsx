@@ -43,6 +43,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="icon" href="/favicon.ico" />
 
         {/* ✅ Google Analytics (GA4) */}
+        <Script id="before-ga" strategy="beforeInteractive">
+          {`console.log("🧪 before gtag loaded");`}
+        </Script>
+        
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-T4RPWCC8RB"
           strategy="beforeInteractive"
