@@ -14,10 +14,10 @@ export default function UpgradeSectionB() {
   ];
   
   // ✅ クリックイベントで GA に送信
-  const handleClick = (label: string) => {
+const handleClick = (label: string) => {
   console.log("✅ clicked!", label);
 
-  const url = "https://gpt-lite.vercel.app";
+  const url = "https://www.google.com"; // ← 修正済み：存在するURLへ変更
   let callbackFired = false;
 
   const openWindow = () => {
