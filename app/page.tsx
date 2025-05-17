@@ -46,12 +46,23 @@ Q3: 応用問題: △△を使って説明せよ`;
             <p className="text-center text-sm text-gray-500 mt-2">
               入力項目をすべて埋めると、より精度の高い教材が作れます。
             </p>
-            
+
             <div className="space-y-2 text-center mt-6">
               <p className="text-sm">もっと多機能な教材作成をしたい方は...</p>
               <Button
                 variant="outline"
-                onClick={() => window.open("https://gpt-tutor-edu.vercel.app", "_blank")}
+                onClick={() => {
+                  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+                    window.gtag("event", "click_upgrade_cta", {
+                      event_category: "engagement",
+                      event_label: "LitePage_Button",
+                      variant: "Lite",
+                    });
+                  }
+                  setTimeout(() => {
+                    window.open("https://gpt-tutor-edu.vercel.app", "_blank");
+                  }, 300);
+                }}
               >
                 正式版はこちら
               </Button>
