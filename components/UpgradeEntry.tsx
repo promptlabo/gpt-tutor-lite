@@ -1,17 +1,23 @@
-// ✅ UpgradeEntry.tsx
+"use client";
+
 import React, { useEffect, useState } from "react";
 import UpgradeSectionA from "./UpgradeSectionA";
 import UpgradeSectionB from "./UpgradeSectionB";
 
+// === gtag 型定義 ===
 declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
   }
 }
 
-type Variant = "A" | "B";
+// 定数：localStorageキー
 const VARIANT_KEY = "upgrade_section_variant";
 
+// バリアント型定義
+type Variant = "A" | "B";
+
+// バリアント取得・保存関数
 function getOrSetVariant(): Variant {
   if (typeof window !== "undefined") {
     const saved = localStorage.getItem(VARIANT_KEY);
@@ -21,7 +27,7 @@ function getOrSetVariant(): Variant {
     localStorage.setItem(VARIANT_KEY, variant);
     return variant;
   }
-  return "A"; // SSR fallback
+  return "A"; // SSR時フォールバック
 }
 
 export default function UpgradeEntry() {
@@ -39,15 +45,5 @@ export default function UpgradeEntry() {
     }
   }, []);
 
-  return (
-    <>
-      <p style={{
-        position: 'fixed', top: 0, right: 0, background: '#eee',
-        fontSize: '12px', padding: '4px', zIndex: 9999
-      }}>
-        現在のバリアント: {variant}
-      </p>
-      {variant === "A" ? <UpgradeSectionA /> : <UpgradeSectionB />}
-    </>
-  );
+  return variant === "A" ? <UpgradeSectionA /> : <UpgradeSectionB />;
 }
