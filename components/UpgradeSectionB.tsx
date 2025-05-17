@@ -21,6 +21,7 @@ export default function UpgradeSectionB() {
 
   // ✅ クリックイベントで GA に送信
   const handleClick = (label: string) => {
+    console.log("✅ clicked!", label); // 👈 これを追加！
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       window.gtag("event", "click_upgrade_cta", {
         event_category: "engagement",
