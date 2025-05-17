@@ -20,19 +20,23 @@ export default function UpgradeSectionA() {
 
   // ✅ CTAクリック時のGAイベント送信処理
   const handleClick = (label: string) => {
-    if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("event", "click_upgrade_cta", {
-        send_to: "G-T4RPWCC8RB",  // ここを追加
-        event_category: "engagement",
-        event_label: label,
-        variant: "A",
-      });
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", "click_upgrade_cta", {
+      send_to: "G-T4RPWCC8RB",
+      event_category: "engagement",
+      event_label: label,
+      variant: "A",
+      // 👇 GA送信が完了したら呼ばれる
+      event_callback: () => {
+        window.location.href = "https://gpt-lite.vercel.app";
+      }
+    });
 
-      // ページ遷移を少し遅らせる（300ms目安）
+    // 念のためのタイムアウトフォールバック（5秒以内に送信されない場合でも進む）
     setTimeout(() => {
       window.location.href = "https://gpt-lite.vercel.app";
-    }, 300);
-    }
+    }, 1500);
+  }
   };
 
   return (
