@@ -14,19 +14,30 @@ export default function UpgradeSectionA() {
       callbackFired = true;
       console.log("🏁 callback fired! opening window...");
       window.open(url, "_blank");
-      }
-    };
-
-    if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      console.log("📤 sending GA event...");
-      window.gtag("event", "click_upgrade_cta");
-      setTimeout(openWindow, 2000);
-    } else {
-      console.log("⚠️ gtag not available, opening window");
-      openWindow();
     }
   };
 
+  // GAが使えるならイベント送信
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    console.log("📤 sending GA event...");
+    
+    // 1 tick 遅らせて呼び出す（初期化レース回避）
+    setTimeout(() => {
+      window.gtag!("event", "click_upgrade_cta", {
+        event_category: "engagement",
+        event_label: label,
+        variant: "A",
+        event_callback: openWindow,
+      });
+    }, 0);
+
+    // 保険：2秒以内に callback が呼ばれなければ open
+    setTimeout(openWindow, 2000);
+  } else {
+    console.log("⚠️ gtag not available, fallback triggered.");
+    openWindow();
+  }
+};
   return (
     <section className="p-8">
       <h2 className="text-xl font-bold mb-4">Lite版のご利用、ありがとうございました！</h2>
