@@ -3,7 +3,7 @@
 
 import { useEffect } from "react";
 
-// ✅ TypeScriptにdataLayerの存在を教える
+// ✅ dataLayer と gtag を型宣言
 declare global {
   interface Window {
     dataLayer: any[];
@@ -13,15 +13,15 @@ declare global {
 
 export default function TestOpenPage() {
   useEffect(() => {
-  if (typeof window !== "undefined") {
-    window.dataLayer = window.dataLayer || [];
-    const gtag = (...args: any[]) => {
-      window.dataLayer.push(args);
-    };
-    window.gtag = gtag;
-    console.log("🧪 gtag manually injected");
-  }
-}, []);
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+      const gtag = (...args: any[]) => {
+        window.dataLayer.push(args);
+      };
+      window.gtag = gtag;
+      console.log("🧪 gtag manually injected");
+    }
+  }, []);
 
   const handleClick = () => {
     console.log("✅ clicked!");
