@@ -22,8 +22,9 @@ export default function UpgradeSectionA() {
   const handleClick = (label: string) => {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       window.gtag("event", "click_upgrade_cta", {
-        label,
-        variant: "A", // UpgradeEntry.tsxと対応
+        event_category: "engagement",
+        event_label: label,
+        variant: "A",
       });
     }
   };
