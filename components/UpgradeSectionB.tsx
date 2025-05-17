@@ -1,34 +1,23 @@
-// ✅ UpgradeSectionB.tsx
 "use client";
-
 import React from "react";
 
 export default function UpgradeSectionB() {
   const catchPhrases = [
     "もう一歩、先生の授業づくりが変わる。",
     "Lite版で満足できた方へ、次のステップをご提案。",
-    "ICTに不安がある先生にも、安心して使える正式版。"
+    "ICTに不安がある先生にも、安心して使える正式版。",
   ];
 
   const specialOffers = [
     "すぐに使える教材テンプレート10種",
     "画面つき操作マニュアルつきで安心",
-    "現場で役立つプロンプト設計集を収録"
+    "現場で役立つプロンプト設計集を収録",
   ];
 
   const handleClick = (label: string) => {
     console.log("✅ clicked!", label);
 
-    const url = "https://www.google.com";
-    let callbackFired = false;
-
-    const openWindow = () => {
-      if (!callbackFired) {
-        callbackFired = true;
-        console.log("🏁 callback fired! opening window...");
-        window.open(url, "_blank");
-      }
-    };
+    const newTab = window.open("about:blank");
 
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       console.log("📤 sending GA event...");
@@ -37,13 +26,17 @@ export default function UpgradeSectionB() {
         event_category: "engagement",
         event_label: label,
         variant: "B",
-        event_callback: openWindow,
+        event_callback: () => {
+          console.log("🏁 callback fired! navigating tab...");
+          newTab?.location.replace("https://www.google.com");
+        },
       });
 
-      setTimeout(openWindow, 1500);
+      setTimeout(() => {
+        newTab?.location.replace("https://www.google.com");
+      }, 1500);
     } else {
-      console.log("⚠️ gtag not found. fallback triggered.");
-      openWindow();
+      newTab?.location.replace("https://www.google.com");
     }
   };
 
@@ -103,7 +96,9 @@ export default function UpgradeSectionB() {
       </section>
 
       <section className="bg-white p-6 rounded-2xl shadow-md text-center">
-        <p className="text-sm text-gray-700 mb-4">まずは内容をじっくりご確認ください</p>
+        <p className="text-sm text-gray-700 mb-4">
+          まずは内容をじっくりご確認ください
+        </p>
         <div className="space-y-2">
           <button
             onClick={() => handleClick("正式版はこちら")}
