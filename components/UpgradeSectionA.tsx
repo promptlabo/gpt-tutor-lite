@@ -20,7 +20,6 @@ export default function UpgradeSectionA() {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       console.log("📤 sending GA event...");
       window.gtag("event", "click_upgrade_cta", {
-        send_to: "G-T4RPWCC8RB",
         event_category: "engagement",
         event_label: label,
         variant: "A",
