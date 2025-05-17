@@ -11,13 +11,9 @@ declare global {
   }
 }
 
-// 定数：localStorageキー
 const VARIANT_KEY = "upgrade_section_variant";
-
-// バリアント型定義
 type Variant = "A" | "B";
 
-// バリアント取得・保存関数
 function getOrSetVariant(): Variant {
   if (typeof window !== "undefined") {
     const saved = localStorage.getItem(VARIANT_KEY);
@@ -27,7 +23,7 @@ function getOrSetVariant(): Variant {
     localStorage.setItem(VARIANT_KEY, variant);
     return variant;
   }
-  return "A"; // SSR時フォールバック
+  return "A";
 }
 
 export default function UpgradeEntry() {
