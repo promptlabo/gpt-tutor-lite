@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-// ✅ dataLayer と gtag を型宣言
+// ✅ 型定義（gtag/dataLayer を使うため）
 declare global {
   interface Window {
     dataLayer: any[];
@@ -13,40 +13,31 @@ declare global {
 export default function TestOpenPage() {
   useEffect(() => {
     if (typeof window !== "undefined") {
+      // gtag 初期化
       window.dataLayer = window.dataLayer || [];
       const gtag = (...args: any[]) => {
         window.dataLayer.push(args);
       };
       window.gtag = gtag;
       console.log("🧪 gtag manually injected");
+
+      // ✅ テストイベントを5回送信（1秒おき）
+      for (let i = 1; i <= 5; i++) {
+        setTimeout(() => {
+          console.log(`📤 Sending click_test_button #${i}`);
+          window.gtag?.("event", "click_test_button", {
+            event_category: "test",
+            event_label: `test-click-${i}`,
+          });
+        }, i * 1000);
+      }
     }
   }, []);
 
-  const handleClick = () => {
-    console.log("✅ clicked!");
-    if (typeof window.gtag === "function") {
-      console.log("📤 sending GA event...");
-      window.gtag("event", "click_test_button", {
-        event_category: "test",
-        event_label: "test-click",
-      });
-      setTimeout(() => {
-        window.open("https://www.google.com", "_blank");
-      }, 500); // ← 0.5秒待ってから遷移
-    } else {
-      window.open("https://www.google.com", "_blank");
-    }
-  };
-
   return (
     <div className="p-8">
-      <h1 className="text-xl font-bold mb-4">テスト：Googleに遷移するか？</h1>
-      <button
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        onClick={handleClick}
-      >
-        Googleへ（テスト）
-      </button>
+      <h1 className="text-xl font-bold mb-4">自動送信テスト中</h1>
+      <p>このページを開くと GA4 に <code>click_test_button</code> イベントが 5 回送信されます。</p>
     </div>
   );
 }
