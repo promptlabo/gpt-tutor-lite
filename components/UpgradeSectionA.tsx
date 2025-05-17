@@ -3,17 +3,18 @@
 import React from "react";
 
 export default function UpgradeSectionA() {
-  const handleClick = (label: string) => {
-    console.log("✅ clicked!", label);
+  const handleClick = () => {
+  console.log("✅ clicked!");
+  console.log("typeof gtag:", typeof window.gtag);
 
-    const url = "https://www.google.com";
-    let callbackFired = false;
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", "click_upgrade_cta");
+    console.log("📤 GA event sent!");
+  } else {
+    console.warn("⚠️ gtag not available");
+  }
 
-    const openWindow = () => {
-      if (!callbackFired) {
-        callbackFired = true;
-        console.log("🏁 callback fired! opening window...");
-        window.open(url, "_blank");
+  window.open("https://www.google.com", "_blank");
       }
     };
 
