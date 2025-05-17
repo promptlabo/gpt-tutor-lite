@@ -27,6 +27,11 @@ export default function UpgradeSectionA() {
         event_label: label,
         variant: "A",
       });
+
+      // ページ遷移を少し遅らせる（300ms目安）
+    setTimeout(() => {
+      window.location.href = "https://gpt-lite.vercel.app";
+    }, 300);
     }
   };
 
