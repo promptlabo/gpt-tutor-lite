@@ -21,7 +21,7 @@ export default function UpgradeSectionA() {
   // ✅ CTAクリック時のGAイベント送信処理
   const handleClick = (label: string) => {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("event", "user_engagement", {
+      window.gtag("event", "click_upgrade_cta", {
         event_category: "engagement",
         event_label: label,
         variant: "A",
