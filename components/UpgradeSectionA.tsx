@@ -13,7 +13,7 @@ export default function UpgradeSectionA() {
   ];
 
   // ✅ CTAクリック時のGAイベント送信処理
-  const handleClick = (label: string) => {
+const handleClick = (label: string) => {
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
     let callbackFired = false;
 
@@ -27,10 +27,11 @@ export default function UpgradeSectionA() {
 
     console.log("📤 sending GA event...");
     window.gtag("event", "click_upgrade_cta", {
+      send_to: "G-T4RPWCC8RB", // ✅ ←これを追加
       event_category: "engagement",
       event_label: label,
       variant: "A",
-      event_callback: openWindow
+      event_callback: openWindow,
     });
 
     setTimeout(openWindow, 2000); // 保険
