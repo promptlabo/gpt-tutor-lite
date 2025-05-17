@@ -29,23 +29,24 @@ export default function UpgradeSectionB() {
   const openWindow = () => {
     if (!callbackFired) {
       callbackFired = true;
+      console.log("🏁 callback fired! opening window...");
       window.open(url, "_blank");
     }
   };
 
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    console.log("📤 sending GA event...");
     window.gtag("event", "click_upgrade_cta", {
-      send_to: "G-T4RPWCC8RB",
       event_category: "engagement",
       event_label: label,
       variant: "B",
-      event_callback: openWindow, // ✅ イベント送信完了後に実行
+      event_callback: openWindow,
     });
 
-    // ✅ 念のためのフォールバック（失敗時にも開く）
+    // フォールバック：1.5秒後に window.open を実行（保険）
     setTimeout(openWindow, 1500);
   } else {
-    // gtagがない環境用のフォールバック
+    console.log("⚠️ gtag not found. fallback triggered.");
     openWindow();
   }
 };
