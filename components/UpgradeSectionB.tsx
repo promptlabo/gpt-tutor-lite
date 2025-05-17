@@ -22,7 +22,7 @@ export default function UpgradeSectionB() {
   // ✅ クリックイベントで GA に送信
   const handleClick = (label: string) => {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("event", "user_engagement", {
+      window.gtag("event", "click_upgrade_cta", {
         event_category: "engagement",
         event_label: label,
         variant: "B", // UpgradeEntry.tsxのA/Bテストに対応
