@@ -1,3 +1,4 @@
+// ✅ UpgradeSectionA.tsx
 import React from "react";
 
 export default function UpgradeSectionA() {
@@ -12,38 +13,36 @@ export default function UpgradeSectionA() {
     "プロのノウハウが詰まったプロンプト設計集を同封"
   ];
 
-  // ✅ CTAクリック時のGAイベント送信処理
-const handleClick = (label: string) => {
-  if (typeof window !== "undefined" && typeof window.gtag === "function") {
-    let callbackFired = false;
+  const handleClick = (label: string) => {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      let callbackFired = false;
 
-    const openWindow = () => {
-      if (!callbackFired) {
-        callbackFired = true;
-        console.log("🏁 callback fired! opening window...");
-        window.open("https://www.google.com", "_blank"); // ← ここを変更
-      }
-    };
+      const openWindow = () => {
+        if (!callbackFired) {
+          callbackFired = true;
+          console.log("🏁 callback fired! opening window...");
+          window.open("https://www.google.com", "_blank");
+        }
+      };
 
-    console.log("📤 sending GA event...");
-    window.gtag("event", "click_upgrade_cta", {
-      send_to: "G-T4RPWCC8RB",
-      event_category: "engagement",
-      event_label: label,
-      variant: "A",
-      event_callback: openWindow,
-    });
+      console.log("📤 sending GA event...");
+      window.gtag("event", "click_upgrade_cta", {
+        send_to: "G-T4RPWCC8RB",
+        event_category: "engagement",
+        event_label: label,
+        variant: "A",
+        event_callback: openWindow,
+      });
 
-    setTimeout(openWindow, 2000); // 保険
-  } else {
-    console.log("⚠️ gtag not available, opening window");
-    window.open("https://www.google.com", "_blank"); // ← ここも変更
-  }
-};
+      setTimeout(openWindow, 2000); // 保険
+    } else {
+      console.log("⚠️ gtag not available, opening window");
+      window.open("https://www.google.com", "_blank");
+    }
+  };
 
   return (
     <>
-      {/* セクション1：キャッチコピー＋共感導入 */}
       <section className="px-4 py-6 bg-white text-gray-800">
         <h2 className="text-xl font-semibold mb-2">{catchPhrases[0]}</h2>
         <ul className="list-disc pl-5 text-sm space-y-1">
@@ -53,7 +52,6 @@ const handleClick = (label: string) => {
         </ul>
       </section>
 
-      {/* セクション2：機能比較表 */}
       <section className="px-4 py-6 bg-gray-50 text-gray-800">
         <h2 className="text-lg font-semibold mb-3">Lite版と正式版の違い</h2>
         <p className="text-xs text-gray-600 mb-2">※スマホでは表を横にスクロールしてご覧ください</p>
@@ -92,7 +90,6 @@ const handleClick = (label: string) => {
         </div>
       </section>
 
-      {/* セクション3：特典紹介 */}
       <section className="px-4 py-6 bg-white text-gray-800">
         <h2 className="text-lg font-semibold mb-2">正式版だけの安心サポート</h2>
         <ul className="list-disc pl-5 text-sm space-y-1">
@@ -102,7 +99,6 @@ const handleClick = (label: string) => {
         </ul>
       </section>
 
-      {/* セクション4：CTAボタン */}
       <section className="px-4 py-6 bg-blue-50 text-center">
         <p className="text-sm mb-3">もっと多機能な教材作成をしたい方は…</p>
         <div className="flex justify-center">
@@ -110,7 +106,7 @@ const handleClick = (label: string) => {
             onClick={() => handleClick("正式版はこちら")}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm"
             aria-label="正式版はこちら"
-            >
+          >
             正式版はこちら
           </button>
         </div>
