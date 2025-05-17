@@ -45,9 +45,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* ✅ Google Analytics (GA4) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-T4RPWCC8RB"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
-        <Script id="ga-init" strategy="afterInteractive">
+        <Script id="ga-init" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
